@@ -11,18 +11,21 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    /*buildTypes {
+    buildTypes {
         release {
             minifyEnabled false
+            //runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }*/
-
-    lintOptions.abortOnError false
+        }
+        lintOptions.abortOnError false
+        debug {
+            jniDebuggable true
+        }
     }
-//}
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:support-v4:22.0.0'
+            compile 'com.android.support:support-v4:22.0.0'
 }
