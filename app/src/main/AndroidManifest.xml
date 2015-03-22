@@ -8,6 +8,8 @@
 
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21"/>
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true" />
 
     <application
         android:allowBackup="true"

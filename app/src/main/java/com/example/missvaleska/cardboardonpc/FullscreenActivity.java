@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.util.Log;
-import com.google.vrtoolkit.cardboard.HeadTransform;
+import com.example.missvaleska.cardboardonpc.Main;
 import java.util.Arrays;
 
 /**
@@ -105,13 +105,8 @@ public class FullscreenActivity extends Activity {
             public void onClick(View view) {
                 if (TOGGLE_ON_CLICK) {
                     mSystemUiHider.toggle();
-
-                    float[] headpos;
-                    headpos =  new float[4];
-                    HeadTransform headTransform = new HeadTransform();
-                    headTransform.getQuaternion(headpos, 0);
-                    Log.d("Rotation Data", java.util.Arrays.toString(headpos));
-
+                    Main main1 = new Main();
+                    main1.onCardboardTrigger();
                 } else {
                     mSystemUiHider.show();
                 }

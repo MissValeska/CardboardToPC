@@ -85,11 +85,28 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="gdx-backend-lwjgl" level="project" />
+    <orderEntry type="library" exported="" name="gdx-natives" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-headless-sources" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-gwt" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-robovm" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-android-sources" level="project" />
+    <orderEntry type="library" exported="" name="gdx-sources" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-lwjgl-sources" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-robovm-sources" level="project" />
+    <orderEntry type="library" exported="" name="appcompat-v7-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-jglfw-sources" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-gwt-sources" level="project" />
+    <orderEntry type="library" exported="" name="gdx" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-android" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-jglfw-natives" level="project" />
     <orderEntry type="library" exported="" name="libprotobuf-java-2.3-nano" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="cardboard" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-jglfw" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-lwjgl-natives" level="project" />
+    <orderEntry type="library" exported="" name="gdx-backend-headless" level="project" />
   </component>
 </module>
 
