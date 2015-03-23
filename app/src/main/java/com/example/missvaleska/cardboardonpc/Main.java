@@ -35,9 +35,6 @@ public class Main extends CardboardActivity implements CardboardView.StereoRende
     private static final float CAMERA_Z = 0.01f;
     private static final float TIME_DELTA = 0.3f;
 
-    Matrix4 tmpMat = new Matrix4();
-    Quaternion tmpQuat = new Quaternion();
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -45,10 +42,6 @@ public class Main extends CardboardActivity implements CardboardView.StereoRende
         CardboardView cardboardView = (CardboardView) findViewById(R.id.fullscreen_content);
         cardboardView.setRenderer(this);
         setCardboardView(cardboardView);
-
-        headpos =  new float[4];
-        headMatrix = new float[16];
-        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 /**
 * Prepares OpenGL ES before we draw a frame.
@@ -107,11 +100,18 @@ public void onSurfaceChanged(int width, int height) {
 public void onCardboardTrigger() {
     Log.i("Trigger", "onCardboardTrigger");
 
-    HeadTracker headTracker = HeadTracker.createFromContext(getContext());
+    Matrix4 tmpMat = new Matrix4();
+    Quaternion tmpQuat = new Quaternion();
 
-    headTracker.getLastHeadView(headMatrix, 0);
+    headpos =  new float[4];
+    headMatrix = new float[16];
+    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+    HeadTracker headTracker = HeadTracker.createFromContext(getBaseContext());
 
     headTracker.startTracking();
+
+    headTracker.getLastHeadView(headMatrix, 0);
 
      tmpMat.set(headMatrix);
      tmpQuat.setFromMatrix(tmpMat);
@@ -119,7 +119,7 @@ public void onCardboardTrigger() {
      tmpQuat.y *= -1;
      tmpQuat.z *= -1;
 
-    Log.d("Rotation Data", java.util.Arrays.toString(tmpQuat.toString()));
+    Log.d("Rotation Data", tmpQuat.toString());
 
         // Always give user feedback.
         vibrator.vibrate(50);
