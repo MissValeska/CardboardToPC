@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" />
 
-    <com.google.vrtoolkit.cardboard.samples.treasurehunt.CardboardOverlayView
+    <com.example.missvaleska.cardboardonpc
         android:id="@+id/overlay"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
