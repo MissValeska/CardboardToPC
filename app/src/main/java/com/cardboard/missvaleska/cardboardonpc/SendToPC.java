@@ -7,6 +7,7 @@ public class SendToPC {
 
     public static native void QuaternionToPC(float[] headrot);
     static {
+        //Libcore.os.setenv("LD_LIBRARY_PATH", "/where/ever/it/is", 1);
         System.loadLibrary("CardboardToPC");
     }
 
