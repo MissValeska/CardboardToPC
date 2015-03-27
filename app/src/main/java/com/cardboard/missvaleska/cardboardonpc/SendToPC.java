@@ -7,7 +7,7 @@ public class SendToPC {
 
     public static native void QuaternionToPC(float[] headrot);
     static {
-        System.loadLibrary("CardboardToPC"); /* (2) */
+        System.loadLibrary("CardboardToPC");
     }
 
     public void JavaToC(float[] headrot) {

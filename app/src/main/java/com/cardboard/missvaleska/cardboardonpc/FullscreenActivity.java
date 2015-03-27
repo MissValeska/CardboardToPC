@@ -198,6 +198,7 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
             //Toast.makeText(getApplicationContext(),java.util.Arrays.toString(q), Toast.LENGTH_LONG).show();
 
             Log.d("Rot", java.util.Arrays.toString(q));
+            Log.d("Property", System.getProperty("java.library.path"));
 
             SendToPC sendToPC = new SendToPC();
             sendToPC.JavaToC(q);
