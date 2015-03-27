@@ -177,8 +177,6 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
         this.points[3] = w;
     }
 
-    native void helloFromC();
-
     @Override
     public final void onSensorChanged(SensorEvent event) {
 
@@ -200,6 +198,9 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
             //Toast.makeText(getApplicationContext(),java.util.Arrays.toString(q), Toast.LENGTH_LONG).show();
 
             Log.d("Rot", java.util.Arrays.toString(q));
+
+            SendToPC sendToPC = new SendToPC();
+            sendToPC.JavaToC(q);
 
             /*float angularXSpeed = event.values[0];
             tv.setText("Angular X speed level is: " + "" + angularXSpeed);*/
