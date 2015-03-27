@@ -2,8 +2,6 @@
 #include <string.h>
 #include "com_cardboard_missvaleska_cardboardonpc_SendToPC.h"
 
-int main(int argc, const char* argv[]) {
-
     JNIEXPORT void JNICALL Java_com_cardboard_missvaleska_cardboardonpc_SendToPC_QuaternionToPC
         (JNIEnv *env, jclass clazz, jfloatArray javaheadrot) {
 
@@ -21,6 +19,3 @@ int main(int argc, const char* argv[]) {
         
         (*env)->ReleaseFloatArrayElements(env, javaheadrot, body, 0);
     }
-    
-  return 0;
-}
