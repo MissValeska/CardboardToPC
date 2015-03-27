@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.example.missvaleska.cardboardonpc"
+        applicationId "com.cardboard.missvaleska.cardboardonpc"
         minSdkVersion 16
         targetSdkVersion 21
         versionCode 1
@@ -14,12 +14,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            //runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        lintOptions.abortOnError false
-        debug {
-            jniDebuggable true
         }
     }
 }

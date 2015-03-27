@@ -1,4 +1,4 @@
-package com.example.missvaleska.cardboardonpc.util;
+package com.cardboard.missvaleska.cardboardonpc.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

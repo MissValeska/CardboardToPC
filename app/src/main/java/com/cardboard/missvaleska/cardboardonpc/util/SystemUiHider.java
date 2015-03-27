@@ -1,4 +1,4 @@
-package com.example.missvaleska.cardboardonpc.util;
+package com.cardboard.missvaleska.cardboardonpc.util;
 
 import android.app.Activity;
 import android.os.Build;
