@@ -8,7 +8,7 @@ int main(int argc, const char* argv[]) {
         (JNIEnv *env, jclass clazz, jfloatArray javaheadrot) {
 
         int i;
-        float sum[3];
+        float sum[4];
         jsize len = (*env)->GetArrayLength(env, javaheadrot);
         
         jfloat *body = (*env)->GetFloatArrayElements(env, javaheadrot, 0);
