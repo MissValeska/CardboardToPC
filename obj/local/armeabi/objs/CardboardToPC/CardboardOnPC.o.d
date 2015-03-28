@@ -19,6 +19,7 @@
  /home/missvaleska/Android/Ndk/platforms/android-3/arch-arm/usr/include/sys/sysmacros.h \
  /home/missvaleska/Android/Ndk/platforms/android-3/arch-arm/usr/include/string.h \
  /home/missvaleska/Android/Ndk/platforms/android-3/arch-arm/usr/include/malloc.h \
+ /home/missvaleska/Android/Ndk/platforms/android-3/arch-arm/usr/include/android/log.h \
  /home/missvaleska/CardboardOnPC/jni/com_cardboard_missvaleska_cardboardonpc_SendToPC.h \
  /home/missvaleska/Android/Ndk/platforms/android-3/arch-arm/usr/include/jni.h
 
@@ -59,6 +60,8 @@
 /home/missvaleska/Android/Ndk/platforms/android-3/arch-arm/usr/include/string.h:
 
 /home/missvaleska/Android/Ndk/platforms/android-3/arch-arm/usr/include/malloc.h:
+
+/home/missvaleska/Android/Ndk/platforms/android-3/arch-arm/usr/include/android/log.h:
 
 /home/missvaleska/CardboardOnPC/jni/com_cardboard_missvaleska_cardboardonpc_SendToPC.h:
 

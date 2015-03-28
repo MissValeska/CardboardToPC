@@ -5,8 +5,10 @@ ARCH := $(APP_ABI)
 include $(CLEAR_VARS)
  
 LOCAL_LDLIBS := -llog
- 
-LOCAL_MODULE    := CardboardOnPC
+
+LOCAL_CFLAGS := -DANDROID -Wall
+
+LOCAL_MODULE    := CardboardToPC
 LOCAL_SRC_FILES := CardboardOnPC.c
  
 include $(BUILD_SHARED_LIBRARY)

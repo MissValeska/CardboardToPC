@@ -1,1 +1,3 @@
-APP_ABI := armeabi armeabi-v7a mips x64
+APP_ABI := all
+
+APP_OPTIM := debug

@@ -177,6 +177,8 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
         this.points[3] = w;
     }
 
+    public native void QuaternionToPC(float[] headrot);
+
     @Override
     public final void onSensorChanged(SensorEvent event) {
 
@@ -200,9 +202,11 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
             Log.d("Rot", java.util.Arrays.toString(q));
             Log.d("Property", System.getProperty("java.library.path"));
 
-            SendToPC sendToPC = new SendToPC();
-            sendToPC.JavaToC(q);
+            System.loadLibrary("CardboardToPC");
 
+            QuaternionToPC(q);
+
+            Log.d("Life", "It's alive!");
             /*float angularXSpeed = event.values[0];
             tv.setText("Angular X speed level is: " + "" + angularXSpeed);*/
         }
