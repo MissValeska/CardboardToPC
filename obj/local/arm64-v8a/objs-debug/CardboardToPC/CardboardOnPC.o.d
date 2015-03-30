@@ -1,5 +1,5 @@
-/home/missvaleska/CardboardOnPC/obj/local/arm64-v8a/objs-debug/CardboardToPC/CardboardOnPC.o: \
- /home/missvaleska/CardboardOnPC/jni/CardboardOnPC.c \
+obj/local/arm64-v8a/objs-debug/CardboardToPC/CardboardOnPC.o: \
+ jni/CardboardOnPC.c \
  /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/stdio.h \
  /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/sys/cdefs.h \
  /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/sys/cdefs_elf.h \
@@ -77,7 +77,8 @@
  /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/linux/ipv6.h \
  /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/arpa/inet.h \
  /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/netdb.h \
- /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/jni.h
+ /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/jni.h \
+ /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/android/log.h
 
 /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/stdio.h:
 
@@ -234,3 +235,5 @@
 /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/netdb.h:
 
 /home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/jni.h:
+
+/home/missvaleska/Android/Ndk/platforms/android-21/arch-arm64/usr/include/android/log.h:

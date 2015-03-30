@@ -1,5 +1,5 @@
-/home/missvaleska/CardboardOnPC/obj/local/mips/objs-debug/CardboardToPC/CardboardOnPC.o: \
- /home/missvaleska/CardboardOnPC/jni/CardboardOnPC.c \
+obj/local/mips/objs-debug/CardboardToPC/CardboardOnPC.o: \
+ jni/CardboardOnPC.c \
  /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/stdio.h \
  /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/sys/cdefs.h \
  /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/sys/cdefs_elf.h \
@@ -71,7 +71,8 @@
  /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/netinet/in6.h \
  /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/arpa/inet.h \
  /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/netdb.h \
- /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/jni.h
+ /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/jni.h \
+ /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/android/log.h
 
 /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/stdio.h:
 
@@ -216,3 +217,5 @@
 /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/netdb.h:
 
 /home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/jni.h:
+
+/home/missvaleska/Android/Ndk/platforms/android-9/arch-mips/usr/include/android/log.h:

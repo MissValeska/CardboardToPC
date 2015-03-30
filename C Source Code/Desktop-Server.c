@@ -47,22 +47,17 @@ int main(void) {
             socklen_t addrlen=sizeof(client_addr);
 
             clientfd = accept(sockfd, (struct sockaddr*)&client_addr, &addrlen);
+            if(clientfd == -1) {
+                printf("accept issues: %d", errno);
+            }
             printf("%s:%d connected\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
 
-            char *buf;
-            buf = malloc(1024);
+            if(recv(sockfd, headrot, sizeof(headrot), 0) == -1) {
+                printf("recv issues, clientfd and errno: %d %d\n", clientfd, errno);
+            }
             
-            recv(clientfd, buf, sizeof(buf), 0);
-            headrot[0] = atof(buf);
-            recv(clientfd, buf, sizeof(buf), 0);
-            headrot[1] = atof(buf);
-            recv(clientfd, buf, sizeof(buf), 0);
-            headrot[2] = atof(buf);
-            recv(clientfd, buf, sizeof(buf), 0);
-            headrot[3] = atof(buf);
-            
-            for(int i=0; i<3; i++) {
-                printf("headrot: %14.11f\n", headrot[i]);
+            for(int i=0; i<4; i++) {
+                printf("buf: %f\n", headrot[i]);
             }
             
             close(clientfd);

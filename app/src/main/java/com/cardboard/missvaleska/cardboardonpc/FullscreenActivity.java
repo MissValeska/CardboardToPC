@@ -62,6 +62,8 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
      */
     private SystemUiHider mSystemUiHider;
 
+    public native void QuaternionToPC(float[] headrot);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,6 +153,8 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
 
         }
 
+        System.loadLibrary("CardboardToPC");
+
     }
 
     @Override
@@ -177,8 +181,6 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
         this.points[3] = w;
     }
 
-    public native void QuaternionToPC(float[] headrot);
-
     @Override
     public final void onSensorChanged(SensorEvent event) {
 
@@ -197,16 +199,10 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
             SensorManager.getQuaternionFromVector(q, event.values);
             setXYZW(q[1], q[2], q[3], -q[0]);
 
-            //Toast.makeText(getApplicationContext(),java.util.Arrays.toString(q), Toast.LENGTH_LONG).show();
-
-            Log.d("Rot", java.util.Arrays.toString(q));
-            Log.d("Property", System.getProperty("java.library.path"));
-
-            System.loadLibrary("CardboardToPC");
+            //Log.d("Rot", java.util.Arrays.toString(q));
+            //Log.d("Property", System.getProperty("java.library.path"));
 
             QuaternionToPC(q);
-
-            Log.d("Life", "It's alive!");
             /*float angularXSpeed = event.values[0];
             tv.setText("Angular X speed level is: " + "" + angularXSpeed);*/
         }
