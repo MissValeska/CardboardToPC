@@ -8,6 +8,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <netinet/tcp.h>
+#include <linux/usbip.h>
+#include "USBTransmit.c"
 
 #define SERVER_PORT 2000
 
@@ -16,6 +19,8 @@ int main(void) {
     float headrot[4];
     struct sockaddr_in self;
 
+    USBTransmit();
+    
     if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
         perror("Error in socket(): \n");
         close(sockfd);
@@ -52,7 +57,7 @@ int main(void) {
             }
             printf("%s:%d connected\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
 
-            if(recv(sockfd, headrot, sizeof(headrot), 0) == -1) {
+            if(recv(clientfd, headrot, sizeof(headrot), 0) == -1) {
                 printf("recv issues, clientfd and errno: %d %d\n", clientfd, errno);
             }
             

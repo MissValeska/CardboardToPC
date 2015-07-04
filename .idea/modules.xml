@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CardboardOnPC.iml" filepath="$PROJECT_DIR$/CardboardOnPC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CardboardToPC.iml" filepath="$PROJECT_DIR$/CardboardToPC.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
