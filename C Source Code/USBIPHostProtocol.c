@@ -263,7 +263,31 @@ void build_usb_device(struct usbip_exported_device *edev) {
         sprintf(modalias, "usb:v%04Xp%04X*", desc.idVendor, desc.idProduct);
 	sprintf(modalias1, "usb:v%04X*", desc.idVendor);
         
-        printf("Original Vendor %04x Product %04x\n", desc.idVendor, desc.idProduct);
+                struct udev_list_entry *entry;
+        const char *cp;
+        const char *cp1;
+        
+        struct udev *udev = NULL;
+        struct udev_hwdb *hwdb = NULL;
+        
+        udev = udev_new();
+        hwdb = udev_hwdb_new(udev);
+        
+        udev_list_entry_foreach(entry, udev_hwdb_get_properties_list_entry(hwdb, modalias, 0))
+            if(strcmp(udev_list_entry_get_name(entry), "ID_MODEL_FROM_DATABASE") == 0) {
+            cp = udev_list_entry_get_value(entry);
+            }
+        
+        udev_list_entry_foreach(entry, udev_hwdb_get_properties_list_entry(hwdb, modalias1, 0))
+            if(strcmp(udev_list_entry_get_name(entry), "ID_VENDOR_FROM_DATABASE") == 0) {
+            cp1 = udev_list_entry_get_value(entry);
+            }
+        
+        snprintf(product, sizeof(product), "%s", cp);
+        snprintf(vendor, sizeof(vendor), "%s", cp1);
+        
+        printf("Original Vendor %04x Product %04x Product Again: %s Vendor Again: %s\n", 
+        desc.idVendor, desc.idProduct, product, vendor);
         
         edev->udev.bDeviceClass = desc.bDeviceClass;
         edev->udev.bDeviceSubClass = desc.bDeviceSubClass;
@@ -274,8 +298,11 @@ void build_usb_device(struct usbip_exported_device *edev) {
         edev->udev.speed = libusb_get_device_speed(device);
         edev->udev.bNumInterfaces = 0;        
         
-        edev->udev.idProduct = 0x0001;
-        edev->udev.idVendor = 0x2833;
+        edev->udev.idProduct = desc.idProduct;
+        edev->udev.idVendor = desc.idVendor;
+        
+        //edev->udev.idProduct = 0x0001;
+        //edev->udev.idVendor = 0x2833;
         
         printf("Built Vendor %04x Product %04x Device %04x Names Product %s\n", edev->udev.idVendor, 
                         edev->udev.idProduct, edev->udev.bcdDevice, names_product(desc.idVendor, desc.idProduct));
