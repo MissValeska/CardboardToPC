@@ -296,7 +296,9 @@ void build_usb_device(struct usbip_exported_device *edev) {
         edev->udev.bcdDevice = desc.bcdDevice;
         edev->udev.busnum = libusb_get_bus_number(device);
         edev->udev.speed = libusb_get_device_speed(device);
-        edev->udev.bNumInterfaces = 0;        
+        edev->udev.bNumInterfaces = 0;   
+        strcpy(edev->udev.busid, "1-1");
+        edev->status = SDEV_ST_AVAILABLE;
         
         edev->udev.idProduct = desc.idProduct;
         edev->udev.idVendor = desc.idVendor;
@@ -442,13 +444,13 @@ int usbip_host_export_device(struct usbip_exported_device *edev, int sockfd)
 
 	snprintf(sockfd_buff, sizeof(sockfd_buff), "%d\n", sockfd);
 
-	ret = write_sysfs_attribute(sockfd_attr_path, sockfd_buff,
+	/*ret = write_sysfs_attribute(sockfd_attr_path, sockfd_buff,
 				    strlen(sockfd_buff));
 	if (ret < 0) {
 		printf("write_sysfs_attribute failed: sockfd %s to %s\n",
 		    sockfd_buff, sockfd_attr_path);
 		return ret;
-	}
+	}*/
 
 	printf("connect: %s\n", edev->udev.busid);
 
@@ -479,14 +481,11 @@ static int recv_request_import(int sockfd)
 	PACK_OP_IMPORT_REQUEST(0, &req);
 
         printf("recv_list_each\n");
-	list_for_each(i, &host_driver->edev_list) {
-		edev = list_entry(i, struct usbip_exported_device, node);
-		if (!strncmp(req.busid, edev->udev.busid, SYSFS_BUS_ID_SIZE)) {
-			printf("found requested device: %s\n", req.busid);
-			found = 1;
-			break;
-		}
-	}
+        
+	build_usb_device(edev);
+	printf("found requested device: %s\n", req.busid);
+	found = 1;
+        
         printf("recv_list_end\n");
 
 	if (found) {
@@ -494,9 +493,6 @@ static int recv_request_import(int sockfd)
 		usbip_net_set_nodelay(sockfd);
 
 		/* export device needs a TCP/IP socket descriptor */
-                
-                edev->udev.idProduct = 0x0001;
-                edev->udev.idVendor = 0x2833;
                 
 		rc = usbip_host_export_device(edev, sockfd);
 		if (rc < 0)
@@ -879,6 +875,7 @@ static int do_standalone_mode(int daemonize, int ipv4, int ipv6)
 		int r;
                 
 		r = ppoll(fds, nsockfd, &timeout, &sigmask);
+                printf("ppoll: %i\n", r);
 		if (r < 0) {
 			printf("%s", strerror(errno));
 			terminate = 1;
