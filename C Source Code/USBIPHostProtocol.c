@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <netinet/tcp.h>
+#include <pthread.h>
 
 #include <getopt.h>
 #include <signal.h>
@@ -26,6 +27,8 @@
 #include "list.h"
 #include "config.h"
 #include "names.h"
+#include "USBIPUSBTunnel.h"
+#include "USBDataGenerator.h"
 
 #undef  PROGNAME
 #define PROGNAME "usbipd"
@@ -299,12 +302,15 @@ void build_usb_device(struct usbip_exported_device *edev) {
         edev->udev.bNumInterfaces = 0;   
         strcpy(edev->udev.busid, "1-1");
         edev->status = SDEV_ST_AVAILABLE;
+        edev->udev.devnum = edev->udev.busnum;
         
-        edev->udev.idProduct = desc.idProduct;
-        edev->udev.idVendor = desc.idVendor;
         
-        //edev->udev.idProduct = 0x0001;
-        //edev->udev.idVendor = 0x2833;
+        
+        //edev->udev.idProduct = desc.idProduct;
+        //edev->udev.idVendor = desc.idVendor;
+        
+        edev->udev.idProduct = 0x0001;
+        edev->udev.idVendor = 0x2833;
         
         printf("Built Vendor %04x Product %04x Device %04x Names Product %s\n", edev->udev.idVendor, 
                         edev->udev.idProduct, edev->udev.bcdDevice, names_product(desc.idVendor, desc.idProduct));
@@ -444,6 +450,10 @@ int usbip_host_export_device(struct usbip_exported_device *edev, int sockfd)
 
 	snprintf(sockfd_buff, sizeof(sockfd_buff), "%d\n", sockfd);
 
+        /* Make this into a thread, Only run it once */
+        
+        get_headrot(sockfd);
+        
 	/*ret = write_sysfs_attribute(sockfd_attr_path, sockfd_buff,
 				    strlen(sockfd_buff));
 	if (ret < 0) {
