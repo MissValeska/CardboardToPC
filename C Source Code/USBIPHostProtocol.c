@@ -292,6 +292,12 @@ void build_usb_device(struct usbip_exported_device *edev) {
         printf("Original Vendor %04x Product %04x Product Again: %s Vendor Again: %s\n", 
         desc.idVendor, desc.idProduct, product, vendor);
         
+        /* Not all of the struct edev is filled, Which may cause problems in the future,
+         * Figuring out what value should go there/generic hard coded value should go there
+         * is required to complete this struct if problems arise without doing so.
+         * Although, It may be good for this to be complete in the future regardless
+         * of whether or not it causes any directly attributable problems/breaking issues. */
+        
         edev->udev.bDeviceClass = desc.bDeviceClass;
         edev->udev.bDeviceSubClass = desc.bDeviceSubClass;
         edev->udev.bDeviceProtocol = desc.bDeviceProtocol;

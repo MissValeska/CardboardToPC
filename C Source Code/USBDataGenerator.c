@@ -16,11 +16,11 @@
 
 #define SERVER_PORT 2010
 
-int headrot_to_usb(int sockfd, float headrot[4]) {
+int headrot_to_usb(int sockfd, float headrot[4], __u32 seqnum12) {
     
     /* Formatting process */
     
-    int ret = create_usb_tunnel(sockfd/*, usb Oculus Rift formatted headrot data */);
+    int ret = create_usb_tunnel(sockfd, seqnum12/*, usb Oculus Rift formatted headrot data */);
     
     return ret;
 }
@@ -55,6 +55,8 @@ int get_headrot(int sockfd1) {
 
         printf("Listening...\n");
         
+        __u32 seqnum1 = 0;
+        
 	while (1) {
             int clientfd;
             struct sockaddr_in client_addr;
@@ -70,7 +72,8 @@ int get_headrot(int sockfd1) {
                 printf("recv issues, clientfd and errno: %d %d\n", clientfd, errno);
             }
             
-            if(headrot_to_usb(sockfd1, headrot) == 0) {
+            if(headrot_to_usb(sockfd1, headrot, seqnum1) == 0) {
+                seqnum1++;
                 /* Success */
             }
             

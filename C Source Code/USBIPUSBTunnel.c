@@ -100,7 +100,7 @@ static int send_cmd_unlink(void) {
     
 }
 
-static int create_usb_tunnel(int sockfd, void *buf, size_t len) {
+static int create_usb_tunnel(int sockfd, __u32 seqnum121, void *buf, size_t len) {
     
 	/*struct usbip_device *ud = data;
 	struct vhci_device *vdev = container_of(ud, struct vhci_device, ud);
@@ -122,11 +122,46 @@ static int create_usb_tunnel(int sockfd, void *buf, size_t len) {
 
 	return 0;*/
         
+        struct msghdr msg;
+        struct iovec iov[3];
+    	size_t txsize;
+
+	size_t total_size = 0;
+        
         struct sockaddr_in client_addr;
         socklen_t addrlen=sizeof(client_addr);
 
-        getpeername(sockfd, (struct sockaddr *)client_addr, addrlen);
+        if(getpeername(sockfd, (struct sockaddr *)client_addr, addrlen) > addrlen) {
+            printf("Error in USBIPUSBTunnel.c:128 getpeername(): %s", strerror(errno));
+        }
             
+	struct usbip_header pdu_header;        
+        
+        txsize = 0;
+	memset(&pdu_header, 0, sizeof(pdu_header));
+	memset(&msg, 0, sizeof(msg));
+	memset(&iov, 0, sizeof(iov));
+        
+        pdu_header.base.command     = USBIP_CMD_SUBMIT;
+        pdu_header.base.seqnum      = seqnum121;
+        /* Add devid here, It should be the same as the devid that should be added 
+         * to USBIPHostProtocol.c Around/in line 300. Although that is called busid 
+         * and may be different, More research and testing is needed. */
+        
+        /*pdu_header.base.devid       = something ;*/
+        
+        /* Add the ability to receive information in the future if necessary/valuable
+         * i.e USBIP_DIR_IN plus associated stuff such as recvmsg, etc. That should 
+         * probably be in another function and stuff.
+         * This will likely not be valuable in the near future, if ever, 
+         * Unless the project's goals expand somewhat drastically, I.E including 
+         * file sharing and such. */
+        pdu_header.base.direction  = USBIP_DIR_OUT;
+        pdu_header.base.ep         = 0;
+                
+        msg.msg_name = (void*)client_addr.sin_addr;
+        msg.msg_namelen = sizeof(client_addr.sin_addr);
+        
         printf("%s:%d connected\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
 
         sendmsg(sockfd, *buf, len, );
