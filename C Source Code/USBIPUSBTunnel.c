@@ -96,6 +96,8 @@
 	return count;
 }*/
 
+/* Set up and use to terminate the connection, As described in USBIP and in 
+ * usbip_protocol.txt in the drivers folder/section of USBIP */
 static int send_cmd_unlink(void) {
     
 }
@@ -158,13 +160,21 @@ static int create_usb_tunnel(int sockfd, __u32 seqnum121, void *buf, size_t len)
          * file sharing and such. */
         pdu_header.base.direction  = USBIP_DIR_OUT;
         pdu_header.base.ep         = 0;
-                
+           
+        /* Finish stuff with pdu_header */
+        
+    	iov[0].iov_base = &pdu_header;
+	iov[0].iov_len  = sizeof(pdu_header);
+	txsize += sizeof(pdu_header);
+        
         msg.msg_name = (void*)client_addr.sin_addr;
         msg.msg_namelen = sizeof(client_addr.sin_addr);
+        msg.msg_iov     = iov;
+        msg.msg_iovlen  = sizeof(iov);
         
         printf("%s:%d connected\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
 
-        sendmsg(sockfd, *buf, len, );
+        sendmsg(sockfd, &msg, );
         
         /*if(recv(sockfd, headrot, sizeof(headrot), 0) == -1) {
             printf("recv issues, clientfd and errno: %d %d\n", sockfd, errno);
