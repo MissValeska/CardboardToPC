@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <errno.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -12,7 +13,7 @@
 #include <android/log.h>
 
 #define SERVER_PORT 2000
-#define SERVER_ADDR "192.168.1.64"
+#define SERVER_ADDR "192.168.1.167"
 
     void Java_com_cardboard_missvaleska_cardboardonpc_FullscreenActivity_QuaternionToPC
         (JNIEnv *env, jobject x, jfloatArray javaheadrot) {

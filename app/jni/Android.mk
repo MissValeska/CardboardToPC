@@ -4,7 +4,7 @@ ARCH := $(APP_ABI)
 
 include $(CLEAR_VARS)
  
-LOCAL_LDLIBS := -llog -lusb-1.0
+LOCAL_LDLIBS := -llog
 
 LOCAL_CFLAGS := -DANDROID -Wall
 
