@@ -1,6 +1,11 @@
 package com.cardboard.missvaleska.cardboardonpc;
 
 import com.cardboard.missvaleska.cardboardonpc.util.SystemUiHider;
+import com.google.vrtoolkit.cardboard.CardboardActivity;
+import com.google.vrtoolkit.cardboard.CardboardView;
+import com.google.vrtoolkit.cardboard.Eye;
+import com.google.vrtoolkit.cardboard.HeadTransform;
+import com.google.vrtoolkit.cardboard.Viewport;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -21,6 +26,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import javax.microedition.khronos.egl.EGLConfig;
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -28,11 +35,15 @@ import android.content.pm.PackageManager;
  *
  * @see SystemUiHider
  */
-public class FullscreenActivity extends Activity implements SensorEventListener {
+
+public class FullscreenActivity extends CardboardActivity implements /*SensorEventListener,TODO:delete sensor stuff*/ CardboardView.Renderer {
 
     private TextView tv;
+    /*TODO:delete sensor stuff
     private SensorManager mSensorManager;
     private Sensor mGyroSensor;
+    */
+    private HeadTransform headTransform;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -69,6 +80,12 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_fullscreen);
+
+        CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
+        cardboardView.setRenderer(this);
+        cardboardView.setTransitionViewEnabled(false);
+        setCardboardView(cardboardView);
+
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
@@ -132,8 +149,8 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
+        /* TODO:delete sensor stuff
         //gyro stuff!
-
         tv= (TextView)findViewById(R.id.txt2);
         // Get an instance of the sensor service
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -152,15 +169,20 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
                 Toast.makeText(getApplicationContext(),"Only gyroscope sensor is present", Toast.LENGTH_LONG).show();
 
         }
+        */
+
+        headTransform = new HeadTransform();
 
         System.loadLibrary("CardboardToPC");
 
     }
 
+    /*TODO:delete sensor stuff
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Do something if sensor accuracy changes.
     }
+    */
 
     /** The points. */
     protected float points[] = { 0, 0, 0, 0 };
@@ -181,8 +203,41 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
         this.points[3] = w;
     }
 
+    //just to satisfy the interface
+    @Override
+    public void onDrawFrame(HeadTransform headTransform, Eye eye, Eye eye1) {
+        float[] eulerAngles = new float[4];//TODO: change back to 3 when not sending through the quaterion interface
+        headTransform.getEulerAngles(eulerAngles, 0);//angles are in radians
+
+        //send through the quaternion interface for now
+        QuaternionToPC(eulerAngles);
+    }
+
+    @Override
+    public void onFinishFrame(Viewport viewport) {
+        //for now, we do nothing
+    }
+
+    @Override
+    public void onSurfaceChanged(int i, int i1) {
+        //for now, we do nothing
+    }
+
+    @Override
+    public void onSurfaceCreated(EGLConfig eglConfig) {
+        //for now, we do nothing
+    }
+
+    @Override
+    public void onRendererShutdown() {
+        //for now, we do nothing
+    }
+
+
+    /*TODO:delete sensor stuff
     @Override
     public final void onSensorChanged(SensorEvent event) {
+
 
         // we received a sensor event. it is a good practice to check
         // that we received the proper event
@@ -197,29 +252,33 @@ public class FullscreenActivity extends Activity implements SensorEventListener 
             float[] q = new float[4];
             // Calculate angle. Starting with API_18, Android will provide this value as event.values[3], but if not, we have to calculate it manually.
             SensorManager.getQuaternionFromVector(q, event.values);
-            setXYZW(q[1], q[2], q[3], -q[0]);
+            setXYZW(event.values[0], event.values[2], event.values[3], -1);
 
             //Log.d("Rot", java.util.Arrays.toString(q));
             //Log.d("Property", System.getProperty("java.library.path"));
 
-            QuaternionToPC(q);
+            //QuaternionToPC(points); TODO: uncomment back in
             /*float angularXSpeed = event.values[0];
-            tv.setText("Angular X speed level is: " + "" + angularXSpeed);*/
+            tv.setText("Angular X speed level is: " + "" + angularXSpeed);*//*
         }
+
     }
+    */
 
     @Override
     protected void onResume() {
         // Register a listener for the sensor.
         super.onResume();
-        mSensorManager.registerListener(this, mGyroSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        //TODO:delete sensor stuff
+        //mSensorManager.registerListener(this, mGyroSensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
     protected void onPause() {
         // important to unregister the sensor when the activity pauses.
         super.onPause();
-        mSensorManager.unregisterListener(this);
+        //TODO:delete sensor stuff
+        //SensorManager.unregisterListener(this);
     }
 
     @Override
