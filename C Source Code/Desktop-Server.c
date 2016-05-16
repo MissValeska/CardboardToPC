@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <errno.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -9,7 +10,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <netinet/tcp.h>
-#include <linux/usbip.h>
+//#include <linux/usbip.h>
 
 #include <math.h>
 
