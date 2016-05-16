@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_com_cardboard_missvaleska_cardboardonpc_SendToPC_QuaternionToPC
-  (JNIEnv *, jobject, jfloatArray, jstring SERVER_ADDR1);
+  (JNIEnv *, jobject, jfloatArray, jstring str);
 
 #ifdef __cplusplus
 }
