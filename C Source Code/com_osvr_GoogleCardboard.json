@@ -1,0 +1,40 @@
+{
+  "deviceVendor": "Google",
+  "deviceName": "Google Cardboard HMD",
+  "author": "Valeska Victoria <missvaleskavv@gmail.com>",
+  "version": 1,
+  "lastModified": "2016-05-16T4:54:14Z",
+  "interfaces": {
+    "tracker": {
+      "count": 1,
+      "position": false,
+      "orientation": true
+    },
+    "analog": {
+      "count": 9,
+      "traits": [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+    }
+  },
+  "semantic": {
+    "hmd": {
+      "$target": "tracker/0",
+      "accelerometer": {
+        "x": "analog/0",
+        "y": "analog/1",
+        "z": "analog/2"
+      },
+      "gyroscope": {
+        "x": "analog/3",
+        "y": "analog/4",
+        "z": "analog/5"
+      },
+      "magnetometer": {
+        "x": "analog/6",
+        "y": "analog/7",
+        "z": "analog/8"
+      },
+  },
+  "automaticAliases": {
+    "/me/head": "semantic/hmd"
+  }
+}
