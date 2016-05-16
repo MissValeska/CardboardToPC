@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <errno.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -9,13 +10,18 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <netinet/tcp.h>
-#include <linux/usbip.h>
+//#include <linux/usbip.h>
 
 #include <math.h>
 
 #include "USBTransmit.c"
+#include "CursorPos.h"
 
 #define SERVER_PORT 2000
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846 /* pi */
+#endif
 
 struct HeadRot{
     float swing;//which way the user is facing on the plane paralell to the ground
@@ -102,6 +108,8 @@ int main(void) {
             close(clientfd);
 	}
 
+        //MoveCursorPos(x, y);
+        
 	close(sockfd);
 	return 0;
 }
