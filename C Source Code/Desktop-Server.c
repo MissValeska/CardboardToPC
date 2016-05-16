@@ -19,6 +19,10 @@
 
 #define SERVER_PORT 2000
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846 /* pi */
+#endif
+
 struct HeadRot{
     float swing;//which way the user is facing on the plane paralell to the ground
     float tilt;//the angle between the horizon and the user's line of sight
