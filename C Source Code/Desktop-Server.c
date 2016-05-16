@@ -11,6 +11,7 @@
 #include <netinet/tcp.h>
 #include <linux/usbip.h>
 #include "USBTransmit.c"
+#include "CursorPos.h"
 
 #define SERVER_PORT 2000
 
@@ -68,6 +69,8 @@ int main(void) {
             close(clientfd);
 	}
 
+        //MoveCursorPos(x, y);
+        
 	close(sockfd);
 	return 0;
 }
