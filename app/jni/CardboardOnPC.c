@@ -13,7 +13,7 @@
 #include <android/log.h>
 
 #define SERVER_PORT 2000
-//#define SERVER_ADDR "192.168.1.79"
+
     void Java_com_cardboard_missvaleska_cardboardonpc_FullscreenActivity_QuaternionToPC
         (JNIEnv *env, jobject x, jfloatArray javaheadrot, jstring str) {
 
@@ -67,6 +67,6 @@
         __android_log_print(ANDROID_LOG_VERBOSE, "buf", "%f", headrot[0]);
 
          close(sockfd);
-         close(SERVER_ADDR);
+         free((void *)SERVER_ADDR);
 
     }
