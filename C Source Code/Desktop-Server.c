@@ -10,14 +10,37 @@
 #include <netdb.h>
 #include <netinet/tcp.h>
 #include <linux/usbip.h>
+
+#include <math.h>
+
 #include "USBTransmit.c"
 #include "CursorPos.h"
 
 #define SERVER_PORT 2000
 
+struct HeadRot{
+    float swing;//which way the user is facing on the plane paralell to the ground
+    float tilt;//the angle between the horizon and the user's line of sight
+    float twist;//the angle the user has their head tilted away from level. 
+    //NOTE: since we expect the phone to be turned sideways, twist when the user's head is level should be 90
+};
+
+//utility function that converts radians to degrees
+float radiansToDegrees(const float radians){
+    return (radians * 180) / M_PI;
+}
+
+//Prints the head rotation passed to it in degrees (assumes HeadRot is in radians)
+void printHeadRot(const struct HeadRot rot){
+    
+    printf("swing: %2.2f degrees\n", radiansToDegrees(rot.swing));
+    printf("tilt:  %2.2f degrees\n", radiansToDegrees(rot.tilt));
+    printf("twist: %2.2f degrees\n",(radiansToDegrees(rot.twist) - 90));//-90 because we expect the phone to be sideways (90 degree twist)
+}
+
 int main(void) {   
     int sockfd;
-    float headrot[4];
+    float headRotData[4];
     struct sockaddr_in self;
 
     USBTransmit();
@@ -58,14 +81,25 @@ int main(void) {
             }
             printf("%s:%d connected\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
 
-            if(recv(clientfd, headrot, sizeof(headrot), 0) == -1) {
+            if(recv(clientfd, headRotData, sizeof(headRotData), 0) == -1) {
                 printf("recv issues, clientfd and errno: %d %d\n", clientfd, errno);
             }
             
+            //Copy the data received into a nice structure
+            struct HeadRot headRot;
+            headRot.tilt  = headRotData[0];
+            headRot.swing = headRotData[1];
+            headRot.twist = headRotData[2];
+            
+            
+            //Print the head rotation TODO: Valeska, put your mouse code here
+            printHeadRot(headRot);
+            
+            /*
             for(int i=0; i<4; i++) {
                 printf("buf: %f\n", headrot[i]);
             }
-            
+            */
             close(clientfd);
 	}
 

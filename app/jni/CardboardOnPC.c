@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <errno.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -12,16 +13,18 @@
 #include <android/log.h>
 
 #define SERVER_PORT 2000
-#define SERVER_ADDR "192.168.1.64"
 
     void Java_com_cardboard_missvaleska_cardboardonpc_FullscreenActivity_QuaternionToPC
-        (JNIEnv *env, jobject x, jfloatArray javaheadrot) {
+        (JNIEnv *env, jobject x, jfloatArray javaheadrot, jstring str) {
 
         int i;
         float headrot[4];
         jsize len = (*env)->GetArrayLength(env, javaheadrot);
         
         jfloat *body = (*env)->GetFloatArrayElements(env, javaheadrot, 0);
+
+        const char * SERVER_ADDR = (*env)->GetStringUTFChars(env, str, 0);
+
     for(i=0; i<len; i++) {
         headrot[i] = body[i];
     }
@@ -64,5 +67,6 @@
         __android_log_print(ANDROID_LOG_VERBOSE, "buf", "%f", headrot[0]);
 
          close(sockfd);
+         free((void *)SERVER_ADDR);
 
     }

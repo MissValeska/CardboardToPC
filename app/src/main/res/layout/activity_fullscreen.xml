@@ -6,6 +6,7 @@
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
+
     <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
         android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
         android:textStyle="bold" android:textSize="50sp" android:gravity="center"
@@ -40,6 +41,24 @@
                 android:layout_weight="1" android:text="@string/dummy_button" />
 
         </LinearLayout>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_gravity="center"
+            android:editable="true"
+            android:text="192.168.1." />
+
+        <com.google.vrtoolkit.cardboard.CardboardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardboard_view"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+
     </FrameLayout>
 
 </FrameLayout>
