@@ -27,6 +27,34 @@
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+            <VideoView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoView_left" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+            <VideoView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoView_right" />
+        </RelativeLayout>
+    </LinearLayout>
+
     <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
@@ -36,11 +64,14 @@
             android:background="@color/black_overlay" android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="@string/dummy_button" />
-
         </LinearLayout>
+
+        <com.google.vrtoolkit.cardboard.CardboardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardboard_view"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -51,13 +82,6 @@
             android:layout_gravity="center"
             android:editable="true"
             android:text="192.168.1." />
-
-        <com.google.vrtoolkit.cardboard.CardboardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cardboard_view"
-            android:layout_gravity="center"
-            android:visibility="invisible" />
 
     </FrameLayout>
 
