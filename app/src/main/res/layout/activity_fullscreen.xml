@@ -12,23 +12,13 @@
         android:textStyle="bold" android:textSize="50sp" android:gravity="center"
         android:text="@string/dummy_content" />
 
-    <TextView
-        android:id="@+id/txt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dummy_button"/>
-
-    <TextView
-        android:id="@+id/txt2"
-        android:layout_below="@+id/txt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
+
     <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:id="@+id/stream_button">
 
         <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
             android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -36,28 +26,34 @@
             android:background="@color/black_overlay" android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="@string/dummy_button" />
-
         </LinearLayout>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|phone"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/ip_text_feild"
             android:layout_gravity="center"
             android:editable="true"
             android:text="192.168.1." />
 
-        <com.google.vrtoolkit.cardboard.CardboardView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cardboard_view"
-            android:layout_gravity="center"
-            android:visibility="invisible" />
+            android:layout_gravity="bottom|right"
+            android:id="@+id/bottom_button_container">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Stream"
+                android:id="@+id/button"
+                android:layout_gravity="center"
+                android:onClick="switchToStreamView" />
+
+        </LinearLayout>
 
     </FrameLayout>
 
