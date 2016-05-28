@@ -1,0 +1,3 @@
+[submodule "Rajawali"]
+	path = Rajawali
+	url = https://github.com/Rajawali/Rajawali.git
